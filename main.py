@@ -30,6 +30,12 @@ RAW_KEYS = {
     },
 }
 
+INITIAL_RECORDS = [
+    {"item_id": "001", "quantity": 32, "price": 12, "location": "D"},
+    {"item_id": "002", "quantity": 20, "price": 14, "location": "C"},
+    {"item_id": "003", "quantity": 22, "price": 16, "location": "B"},
+]
+
 
 # DATA MODELS
 @dataclass
@@ -62,25 +68,27 @@ def ensure_data_folder() -> None:
 
 
 def initialise_storage(nodes: Dict[str, InventoryNode]) -> None:
+    """Create each node's storage file pre-loaded with the Figure-1 records
+    (001, 002, 003) if the file doesn't already exist.
+    """
     ensure_data_folder()
     for node in nodes.values():
         if not os.path.exists(node.storage_file):
             with open(node.storage_file, "w", encoding="utf-8") as f:
-                json.dump([], f, indent=2)
+                json.dump(list(INITIAL_RECORDS), f, indent=2)
 
 
 def stable_record_string(record: Dict) -> str:
     """
-    Convert record into a consistent string.
-    This matters because the exact same content must hash the same way.
+    Convert record into a consistent string using the four Figure-1 fields
+    in a fixed order. The same record content must always hash to the
+    same value, so the field order is locked here.
     """
     return (
-        f"{record['record_id']}|"
         f"{record['item_id']}|"
-        f"{record['item_name']}|"
         f"{record['quantity']}|"
-        f"{record['action']}|"
-        f"{record['origin_node']}"
+        f"{record['price']}|"
+        f"{record['location']}"
     )
 
 
@@ -197,14 +205,12 @@ def main() -> None:
     # Show derived RSA values for the sending node
     print_rsa_parameters(sender)
 
-    # STEP 1: CREATE A NEW INVENTORY RECORD
+    # STEP 1: CREATE A NEW INVENTORY RECORD - matches Figure 1 (004 from A)
     record = {
-        "record_id": "R001",
         "item_id": "004",
-        "item_name": "Keyboard",
         "quantity": 12,
-        "action": "RESTOCK",
-        "origin_node": sender_id,
+        "price": 18,
+        "location": "A",
     }
     record_string = stable_record_string(record)
 
@@ -230,21 +236,12 @@ def main() -> None:
     )
 
     # STEP 5: STORE RECORD IF ACCEPTED
+    # We store the record itself (not a wrapper around it) so Task 3 can
+    # look it up by item_id directly.
     if consensus_result["accepted"]:
-        record_package = {
-            "record": record,
-            "record_string": record_string,
-            "sender_public_key": {
-                "e": sender.e,
-                "n": sender.n,
-            },
-            "signature": signed["signature"],
-            "consensus": consensus_result,
-        }
-
         print("=== STEP 5: STORING ACCEPTED RECORD IN ALL NODES ===")
         for node in nodes.values():
-            append_record_to_node(node, record_package)
+            append_record_to_node(node, record)
             print(f"Stored in Inventory {node.node_id}: {node.storage_file}")
         print("\nRecord successfully stored in all local inventory databases.")
     else:

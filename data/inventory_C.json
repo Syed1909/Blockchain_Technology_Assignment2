@@ -1,116 +1,26 @@
 [
   {
-    "record": {
-      "record_id": "R001",
-      "item_id": "004",
-      "item_name": "Keyboard",
-      "quantity": 12,
-      "action": "RESTOCK",
-      "origin_node": "A"
-    },
-    "record_string": "R001|004|Keyboard|12|RESTOCK|A",
-    "sender_public_key": {
-      "e": 815459040813953176289801,
-      "n": 1510655732025614931618473113490936936007010876086492730422218817435607919502486239158421141
-    },
-    "signature": 914068828397713633812933654778916582835620940062250425554364034189769335058585632806731957,
-    "consensus": {
-      "accepted": true,
-      "votes": [
-        {
-          "verifier": "B",
-          "valid_signature": true,
-          "vote": "ACCEPT"
-        },
-        {
-          "verifier": "C",
-          "valid_signature": true,
-          "vote": "ACCEPT"
-        },
-        {
-          "verifier": "D",
-          "valid_signature": true,
-          "vote": "ACCEPT"
-        }
-      ],
-      "accept_count": 4,
-      "majority_needed": 3
-    }
+    "item_id": "001",
+    "quantity": 32,
+    "price": 12,
+    "location": "D"
   },
   {
-    "record": {
-      "record_id": "R001",
-      "item_id": "004",
-      "item_name": "Keyboard",
-      "quantity": 12,
-      "action": "RESTOCK",
-      "origin_node": "A"
-    },
-    "record_string": "R001|004|Keyboard|12|RESTOCK|A",
-    "sender_public_key": {
-      "e": 815459040813953176289801,
-      "n": 1510655732025614931618473113490936936007010876086492730422218817435607919502486239158421141
-    },
-    "signature": 914068828397713633812933654778916582835620940062250425554364034189769335058585632806731957,
-    "consensus": {
-      "accepted": true,
-      "votes": [
-        {
-          "verifier": "B",
-          "valid_signature": true,
-          "vote": "ACCEPT"
-        },
-        {
-          "verifier": "C",
-          "valid_signature": true,
-          "vote": "ACCEPT"
-        },
-        {
-          "verifier": "D",
-          "valid_signature": true,
-          "vote": "ACCEPT"
-        }
-      ],
-      "accept_count": 4,
-      "majority_needed": 3
-    }
+    "item_id": "002",
+    "quantity": 20,
+    "price": 14,
+    "location": "C"
   },
   {
-    "record": {
-      "record_id": "R001",
-      "item_id": "004",
-      "item_name": "Keyboard",
-      "quantity": 12,
-      "action": "RESTOCK",
-      "origin_node": "A"
-    },
-    "record_string": "R001|004|Keyboard|12|RESTOCK|A",
-    "sender_public_key": {
-      "e": 815459040813953176289801,
-      "n": 1510655732025614931618473113490936936007010876086492730422218817435607919502486239158421141
-    },
-    "signature": 914068828397713633812933654778916582835620940062250425554364034189769335058585632806731957,
-    "consensus": {
-      "accepted": true,
-      "votes": [
-        {
-          "verifier": "B",
-          "valid_signature": true,
-          "vote": "ACCEPT"
-        },
-        {
-          "verifier": "C",
-          "valid_signature": true,
-          "vote": "ACCEPT"
-        },
-        {
-          "verifier": "D",
-          "valid_signature": true,
-          "vote": "ACCEPT"
-        }
-      ],
-      "accept_count": 4,
-      "majority_needed": 3
-    }
+    "item_id": "003",
+    "quantity": 22,
+    "price": 16,
+    "location": "B"
+  },
+  {
+    "item_id": "004",
+    "quantity": 12,
+    "price": 18,
+    "location": "A"
   }
 ]
