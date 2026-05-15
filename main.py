@@ -79,11 +79,7 @@ def initialise_storage(nodes: Dict[str, InventoryNode]) -> None:
 
 
 def stable_record_string(record: Dict) -> str:
-    """
-    Convert record into a consistent string using the four Figure-1 fields
-    in a fixed order. The same record content must always hash to the
-    same value, so the field order is locked here.
-    """
+    
     return (
         f"{record['item_id']}|"
         f"{record['quantity']}|"
